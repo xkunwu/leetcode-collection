@@ -1,6 +1,11 @@
+#include <iostream>
+#include <vector>
+using namespace std;
+
+
 class Solution {
 	/** #4. Median of Two Sorted Arrays
-		https://leetcode.com/problems/3sum-closest/
+		https://leetcode.com/problems/median-of-two-sorted-arrays/description/
 		There are two sorted arrays nums1 and nums2 of size m and n respectively.
 
 		Find the median of the two sorted arrays. The overall run time complexity should be O(log (m+n)).
@@ -37,7 +42,7 @@ public:
         if (0 >= part1) median = nums2[part2 - 1];
         else if (0 >= part2) median = nums1[part1 - 1];
         else median = max(nums1[part1 - 1], nums2[part2 - 1]);
-        cout << median << endl;
+        // cout << median << endl;
         // odd: simply return the extra of the first partition
         if (1 & (nn1 + nn2)) return (double)median;
         // even: be carefult of full-range
@@ -53,3 +58,11 @@ public:
         else return findOrdered(nums1, nums2, nn1, nn2);
     }
 };
+
+int main(void)
+{
+    vector<int> nums1 = {1,2,5};
+    vector<int> nums2 = {3,4};
+    Solution solution;
+    cout << solution.findMedianSortedArrays(nums1, nums2) << endl;
+}
