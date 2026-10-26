@@ -6,6 +6,8 @@ using namespace std;
 class SolutionSet {
     /** 2215. Find the Difference of Two Arrays
      * https://leetcode.com/problems/find-the-difference-of-two-arrays/
+     * 
+     * Using STL algorithms shows better performance than STL data structure.
      */
 public:
     vector<vector<int>> findDifference(vector<int>& nums1, vector<int>& nums2) {
@@ -32,6 +34,8 @@ public:
 class Solution {
     /** 2215. Find the Difference of Two Arrays
      * https://leetcode.com/problems/find-the-difference-of-two-arrays/
+     * 
+     * Using STL algorithms shows better performance than STL data structure.
      */
 public:
     vector<vector<int>> findDifference(vector<int>& nums1, vector<int>& nums2) {

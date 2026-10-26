@@ -1,6 +1,6 @@
-# LeetCode Live-Coding Solutions for University Algorithm Courses
+# LeetCode Solutions for Algorithm Courses
 
-> This repository contains solutions to [LeetCode problems](https://leetcode.com/problemset/) created for use in a university algorithm course. It is maintained as a teaching companion and is updated as the course progresses.
+> This repository contains live-coding solutions to [LeetCode problems](https://leetcode.com/problemset/) created for use in a university algorithm course. It is maintained as a teaching companion and is updated as the course progresses.
 
 ## Overview
 

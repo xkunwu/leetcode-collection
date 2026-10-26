@@ -6,6 +6,8 @@ using namespace std;
 class SolutionStack {
     /** 2390. Removing Stars From a String
      * https://leetcode.com/problems/removing-stars-from-a-string/
+     * 
+     * The title is a trap! Using algorithmic strategy shows better performance than STL data structure.
      */
 public:
     string removeStars(string s) {
@@ -29,6 +31,8 @@ public:
 class Solution {
     /** 2390. Removing Stars From a String
      * https://leetcode.com/problems/removing-stars-from-a-string/
+     * 
+     * The title is a trap! Using algorithmic strategy shows better performance than STL data structure.
      */
 public:
     string removeStars(string s) {

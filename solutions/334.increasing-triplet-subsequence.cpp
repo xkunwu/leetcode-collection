@@ -6,7 +6,9 @@ using namespace std;
 
 class Solution {
 	/** 334. Increasing Triplet Subsequence
-		https://leetcode.com/problems/increasing-triplet-subsequence/
+	 * https://leetcode.com/problems/increasing-triplet-subsequence/
+	 * 
+	 * Unexpected solution - easier than I thought.
 	 */
 public:
 	bool increasingTriplet(vector<int>& nums) {

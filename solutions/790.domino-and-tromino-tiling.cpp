@@ -4,7 +4,9 @@ using namespace std;
 
 class SolutionSimu {
 	/** 790. Domino and Tromino Tiling
-	  https://leetcode.com/problems/domino-and-tromino-tiling/
+	 *  https://leetcode.com/problems/domino-and-tromino-tiling/
+	 *
+	 *  Use math to simplify the recurrence relation and achieve better performance.
 	 */
 public:
     int numTilings(int n) {

@@ -6,7 +6,9 @@ using namespace std;
 
 class SolutionSimu {
 	/** 649. Dota2 Senate
-	  https://leetcode.com/problems/dota2-senate/
+	 * https://leetcode.com/problems/dota2-senate/
+	 * 
+	 * Simulation solves the problem with bad performance - think further to find a better model.
 	 */
 public:
     string predictPartyVictory(string senate) {

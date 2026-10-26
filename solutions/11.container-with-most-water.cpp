@@ -5,6 +5,8 @@ using namespace std;
 class Solution {
 	/** 11. Container With Most Water
 	 *  https://leetcode.com/problems/container-with-most-water/
+	 * 
+	 * A greedy strategy - it becomes obvious when you know the idea.
 	 */
 public:
     int maxArea(vector<int>& height) {
