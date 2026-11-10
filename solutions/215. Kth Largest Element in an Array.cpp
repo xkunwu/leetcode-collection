@@ -44,7 +44,7 @@ public:
         nth_element(
             nums.begin(), nums.begin() + k, nums.end(),
             greater<int>());
-        for (int nn : nums) cout << nn << " "; cout << endl;
+        // for (int n : nums) { cout << n << " "; } cout << endl;
         return nums[k];
     }
 };

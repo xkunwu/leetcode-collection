@@ -45,3 +45,47 @@ public:
         return span;
     }
 };
+
+class StockSpanner {
+    vector<pair<int, int>> S;
+    int day;
+public:
+    StockSpanner() {
+        day = -1;
+    }
+    
+    int next(int price) {
+        ++day;
+        int span = 0;
+        while (!S.empty() && price >= S.back().first) {
+            span = day - S.back().second;
+            S.pop_back();
+        }
+        S.push_back({price, day - span});
+        // cout << day << ":" << span << ":";
+        // for (auto s: S) { cout << s.first << "," << s.second << " "; } cout << endl;
+        return span + 1;
+    }
+};
+
+class StockSpanner {
+    vector<pair<int, int>> S;
+    int day;
+public:
+    StockSpanner() {
+        day = -1;
+        S.push_back({100001, -1});
+    }
+    
+    int next(int price) {
+        ++day;
+        while (price >= S.back().first) {
+            S.pop_back();
+        }
+        const int span = day - S.back().second;
+        S.push_back({price, day});
+        // cout << day << ":" << span << ":";
+        // for (auto s: S) { cout << s.first << "," << s.second << " "; } cout << endl;
+        return span;
+    }
+};

@@ -64,11 +64,12 @@ public:
 		const size_t N = nums1.size();
 		size_t i;
 		vector<pair<int, int>> pair_arr(N);
+        pair_arr.reserve(N);
 		for (i = 0; i < N; ++i) {
-			pair_arr[i] = {nums1[i], nums2[i]};
+			pair_arr.emplace_back(nums1[i], nums2[i]);
 		}
 		sort(pair_arr.begin(), pair_arr.end(),
-			 [&](const auto& a, const auto& b) { return a.second > b.second; }
+			 [](const auto& a, const auto& b) { return a.second > b.second; }
 			 );
 		priority_queue<int, vector<int>, greater<int>> min_heap;
 		long long maxScore = 0, score = 0;
@@ -87,16 +88,6 @@ public:
 			min_heap.pop();
 			maxScore = max(maxScore, score * b);
 		}
-//		const size_t ks = k;
-//		for (const auto& [a, b]: pair_arr) {
-//			score += a;
-//			min_heap.push(a);
-//			if (min_heap.size() > ks) {
-//				score -= min_heap.top();
-//				min_heap.pop();
-//			}
-//			if (min_heap.size() == ks) maxScore = max(maxScore, score * b);
-//		}
 		return maxScore;
 	}
 };
