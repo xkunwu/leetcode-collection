@@ -7,22 +7,36 @@ public:
         const int N = nums.size();
         long long res = N;
 
-        /** Memory Limit Exceeded */
+        // /** Time Limit Exceeded */
         vector<int> ns(nums);
         vector<long long> st(N);
         for (int r = 1; r < N; ++r) {
             const int nc = N - r;
-            vector<int> ns1(nc);
-            vector<long long> st1(nc);
             for (int c = 0; c < nc; ++c) {
-                ns1[c] = max(ns[c], ns[c + 1]);
-                st1[c] = st[c] + ns1[c] - nums[c + r];
-                if (k >= st1[c]) ++res;
+                ns[c] = max(ns[c], ns[c + 1]);
+                st[c] = st[c] + ns[c] - nums[c + r];
+                if (k >= st[c]) ++res;
                 // cout << ns[c] << ',' << st[c] << ' ';
             }
-            ns = move(ns1); st = move(st1);
             // cout << endl;
         }
+
+        // /** Memory Limit Exceeded, again */
+        // vector<int> ns(nums);
+        // vector<long long> st(N);
+        // for (int r = 1; r < N; ++r) {
+        //     const int nc = N - r;
+        //     vector<int> ns1(nc);
+        //     vector<long long> st1(nc);
+        //     for (int c = 0; c < nc; ++c) {
+        //         ns1[c] = max(ns[c], ns[c + 1]);
+        //         st1[c] = st[c] + ns1[c] - nums[c + r];
+        //         if (k >= st1[c]) ++res;
+        //         // cout << ns[c] << ',' << st[c] << ' ';
+        //     }
+        //     ns = move(ns1); st = move(st1);
+        //     // cout << endl;
+        // }
 
         // /** Memory Limit Exceeded */
         // vector<vector<pair<int, long long>>> st(N, vector<pair<int, long long>>(N));
@@ -34,6 +48,84 @@ public:
         //         if (k >= st[r][c].second) ++res;
         //     }
         // }
+        return res;
+    }
+};
+
+class Solution {
+public:
+    long long countNonDecreasingSubarrays(vector<int>& nums, int k) {
+        const int N = nums.size();
+        const int LG = bit_width((unsigned int)N);
+        long long res = 0;
+        vector<long long> presum(N + 1);
+        for (int i = 0; i < N; ++i) presum[i + 1] = presum[i] + nums[i];
+        vector<vector<long long>> cost(LG, vector<long long>(N));
+        vector<vector<int>> jump(LG, vector<int>(N));
+        {
+            vector<int> next_gt(N, N);
+            vector<int> st;
+            for (int i: views::iota(0, N)) {
+                while (!st.empty() && nums[st.back()] < nums[i]) {
+                    next_gt[st.back()] = i;
+                    st.pop_back();
+                }
+                st.push_back(i);
+            }
+            // for (auto& x: next_gt) { cout << x << ','; } cout << endl;
+            for (int i: views::iota(0, N)) {
+                const int& ng = next_gt[i];
+                jump[0][i] = ng;
+                const long long len = ng - i;
+                cost[0][i] = len * nums[i] - (presum[ng] - presum[i]);
+            }
+            for (int e = 1; e < LG; ++e) {
+                for (int i = 0; i < N; ++i) {
+                    const int& mid = jump[e - 1][i];
+                    if (mid < N) {
+                        jump[e][i] = jump[e - 1][mid];
+                        cost[e][i] = cost[e - 1][i] + cost[e - 1][mid];
+                    } else {
+                        jump[e][i] = N;
+                        cost[e][i] = cost[e - 1][i];
+                    }
+                }
+            }
+            // for (int e = 0; e < LG; ++e) {
+            //     for (int i = 0; i < N; ++i) {
+            //         cout << jump[e][i] << ',' << cost[e][i] << ' ';
+            //     }
+            //     cout << endl;
+            // }
+        }
+        for (int L = 0; L < N; ++L) {
+            int J = L, k0 = k;
+            for (int e = LG - 1; e >= 0 && J < N; --e) {
+                if (cost[e][J] <= k0) {
+                    k0 -= cost[e][J];
+                    J = jump[e][J];
+                }
+            }
+            // cout << L << ' ' << J << ' ' << k0 << ':';
+            int R = N - 1;
+            if (J < R) {
+                int lo = J, hi = jump[0][J] - 1;
+                int rb = J;
+                while (lo <= hi) {
+                    const int& mid = lo + (hi - lo) / 2;
+                    const long long len = mid - J + 1;
+                    const long long c = len * nums[J] - (presum[mid + 1] - presum[J]);
+                    if (c <= k0) {
+                        rb = mid;
+                        lo = mid + 1;
+                    } else { hi = mid - 1; }
+                    // cout << mid << '/' << c << '/' << rb << ',';
+                }
+                R = rb;
+            }
+            res += R - L + 1;
+            // cout << " -> " << L << ' ' << R << '=' << res << endl;
+        }
         return res;
     }
 };
